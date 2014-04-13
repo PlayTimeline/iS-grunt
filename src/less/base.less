@@ -1,0 +1,15 @@
+@clr: red;
+
+.bootstrap (@bclr: white) {
+  background-color: @bclr;
+}
+
+#twitter {
+  border: 1px dotted silver;
+  h1 {
+    .bootstrap(@clr);
+    h2 {
+      .bootstrap;
+    }
+  }
+}
