@@ -38,9 +38,7 @@ module.exports = (grunt) ->
         cwd: 'dest/js',
         src: '*.js',
         dest: 'dest/js/min',
-        ext: '.min.js',
-        options:
-          banner: '\/\/ create by <%=pkg.author%> in <%=grunt.template.today("yyyy-mm-dd")%> \n'
+        ext: '.min.js'
     # 动态
     watch:
       script:
@@ -48,6 +46,15 @@ module.exports = (grunt) ->
         tasks: ['less', 'coffee']
         options:
           livereload: true
+    # 打包
+    concat:
+      dist:
+        files:
+          'dest/js/lib.min.js': ['dest/js/min/*.min.js'],
+          'dest/css/style.min.css': ['dest/css/min/*.min.css']
+        options:
+          banner: '\/\/ create by <%=pkg.author%> in <%=grunt.template.today("yyyy-mm-dd")%> \n',
+          separator: ';'
 
   # 从 node_modules 目录加载模块
   grunt.loadNpmTasks 'grunt-contrib-less'
@@ -55,9 +62,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-concat'
 
-  # 定义默认任务
+  # 定义默认任务 grunt
   grunt.registerTask 'default', ['watch']
 
-  # 定义具体的任务
+  # 定义具体的任务 grunt coming soon
   grunt.registerTask 'coming', ['less', 'cssmin', 'coffee', 'uglify']
+  grunt.registerTask 'soon', ['concat']
